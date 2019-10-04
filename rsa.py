@@ -20,3 +20,18 @@ def gcd(a: int, b: int) -> int: #алгоритм евклида
         while b != 0:
             (a, b) = (b, a % b)
         return a
+
+def generate_keypair():
+    n = p*q
+    phi = (p - 1)*(q - 1)
+    import random
+    e = random.randrange(1, phi)
+    while not ((is_prime(e)==True) and (gcd(e, phi)==1)):
+        e = random.randrange(1, phi)
+    d = random.randrange(1, phi)
+    while not ((d * e % phi == 1) and e != d):
+        d = random.randrange(1, phi)
+    return (e, n), (d, n)
+
+
+print(generate_keypair())
