@@ -21,13 +21,22 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
 
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
-    """
-    >>> decrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> decrypt_vigenere("python", "a")
-    'python'
-    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
-    'ATTACKATDAWN'
-    """
-    # PUT YOUR CODE HERE
+    key = list(keyword)
+    plaintext = []
+    while len(key)<len(ciphertext):
+        for i in keyword:
+            if len(key)<len(ciphertext):
+                key.append(i)        
+    if keyword.isupper():
+        for l, k in zip(ciphertext, key):
+            if (ord(l)<ord(k)):
+                l = chr(ord(l)+26)
+            c = chr(ord(l)-(ord(k)-65))
+            plaintext.append(c)
+    elif keyword.islower():
+        for l, k in zip(ciphertext, key):
+            if (ord(l)<ord(k)):
+                l = chr(ord(l)+26)
+            c = chr(ord(l)-(ord(k)-97))
+            plaintext.append(c)
     return plaintext
