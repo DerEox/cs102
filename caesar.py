@@ -1,16 +1,23 @@
-def encrypt_caesar(plaintext: str) -> str:
-    """
-    >>> encrypt_caesar("PYTHON")
-    'SBWKRQ'
-    >>> encrypt_caesar("python")
-    'sbwkrq'
-    >>> encrypt_caesar("Python3.6")
-    'Sbwkrq3.6'
-    >>> encrypt_caesar("")
-    ''
-    """
-    # PUT YOUR CODE HERE
-    return ciphertext
+def encrypt_caesar(shift: int, plaintext: str) -> str:
+	ciphertext = []
+	for l in plaintext:
+		if l.isupper(): #for uppercase
+			if ord(l)<=90-shift:
+				l = chr(ord(l)+shift)
+				ciphertext.append(l)
+			else:
+				l = chr(ord(l)-26+shift)
+				ciphertext.append(l)
+		elif l.islower(): #for lowercase
+			if ord(l)<=122-shift:
+				l = chr(ord(l)+shift)
+				ciphertext.append(l)
+			else:
+				l = chr(ord(l)-26+shift)
+				ciphertext.append(l)
+		else:
+			ciphertext.append(l)
+	return ciphertext
 
 
 def decrypt_caesar(ciphertext: str) -> str:
