@@ -15,3 +15,8 @@ if (is_prime(p)==False) or (is_prime(q)==False):
     raise ValueError('both must be prime')
 elif p==q:
     raise ValueError('cannot be equal')
+
+def gcd(a: int, b: int) -> int: #алгоритм евклида
+        while b != 0:
+            (a, b) = (b, a % b)
+        return a
