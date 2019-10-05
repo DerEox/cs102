@@ -1,42 +1,36 @@
 def encrypt_caesar(shift: int, plaintext: str) -> str:
-	ciphertext = []
-	for l in plaintext:
-		if l.isupper(): #for uppercase
-			if ord(l)<=90-shift:
-				l = chr(ord(l)+shift)
-				ciphertext.append(l)
+	ciphertext = ''
+	for ch in plaintext:
+		if ch.isalpha(): 
+			if ch.isupper():
+				code_Z = 90
 			else:
-				l = chr(ord(l)-26+shift)
-				ciphertext.append(l)
-		elif l.islower(): #for lowercase
-			if ord(l)<=122-shift:
-				l = chr(ord(l)+shift)
-				ciphertext.append(l)
+				code_Z = 122
+			if ord(ch) <= code_Z - shift:
+				ch = chr(ord(ch) + shift)
+				ciphertext += ch
 			else:
-				l = chr(ord(l)-26+shift)
-				ciphertext.append(l)
+				ch = chr(ord(ch)-26 + shift)
+				ciphertext += ch
 		else:
-			ciphertext.append(l)
+			ciphertext += ch
 	return ciphertext
 
 
 def decrypt_caesar(shift: int, ciphertext: str) -> str:
-	plaintext = []
-	for l in ciphertext:
-		if l.isupper(): #for uppercase
-			if ord(l)>65+shift:
-				l = chr(ord(l)-shift)
-				plaintext.append(l)
+	plaintext = ''
+	for ch in ciphertext:
+		if ch.isalpha(): 
+			if ch.isupper():
+				code_A = 65
 			else:
-				l = chr(ord(l)+26-shift)
-				plaintext.append(l)
-		elif l.islower(): #for lowercase
-			if ord(l)>97+shift:
-				l = chr(ord(l)-shift)
-				plaintext.append(l)
+				code_A = 97
+			if ord(ch) > code_A + shift:
+				ch = chr(ord(ch) - shift)
+				plaintext += ch
 			else:
-				l = chr(ord(l)+26-shift)
-				plaintext.append(l)
+				ch = chr(ord(ch) + 26 - shift)
+				plaintext += ch
 		else:
-			plaintext.append(l)
+			plaintext += ch
 	return plaintext

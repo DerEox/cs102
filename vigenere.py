@@ -1,42 +1,30 @@
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
-    key = list(keyword)
-    ciphertext = []
-    while len(key)<len(plaintext):
+    ciphertext = ''
+    while len(keyword) < len(plaintext):
         for i in keyword:
-            if len(key)<len(plaintext):
-                key.append(i)        
+            if len(keyword) < len(plaintext):
+                keyword += i       
     if keyword.isupper():
-        for l, k in zip(plaintext, key):
-            if (ord(l)+ord(k))-65 >90:
-               l = chr((ord(l))-26)
-            c = (chr(ord(l) + (ord(k)-65)))
-            ciphertext.append(c)
-    elif keyword.islower():
-        for l, k in zip(plaintext, key):
-            if (ord(l)+ord(k))-97 >122:
-                l = chr((ord(l))-26)
-            c = (chr(ord(l) + (ord(k)-97)))
-            ciphertext.append(c)
+        code_A, code_Z = 65, 90
+    else: code_A, code_Z = 97, 122
+    for ch, k in zip(list(plaintext), list(keyword)):
+        if ord(ch) + ord(k) - code_A > code_Z:
+            ch = chr((ord(ch)) - 26)
+        ciphertext += chr(ord(ch) + (ord(k) - code_A))
     return ciphertext
 
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
-    key = list(keyword)
-    plaintext = []
-    while len(key)<len(ciphertext):
+    plaintext = ''
+    while len(keyword) < len(ciphertext):
         for i in keyword:
-            if len(key)<len(ciphertext):
-                key.append(i)        
+            if len(keyword) < len(ciphertext):
+                keyword += i   
     if keyword.isupper():
-        for l, k in zip(ciphertext, key):
-            if (ord(l)<ord(k)):
-                l = chr(ord(l)+26)
-            c = chr(ord(l)-(ord(k)-65))
-            plaintext.append(c)
-    elif keyword.islower():
-        for l, k in zip(ciphertext, key):
-            if (ord(l)<ord(k)):
-                l = chr(ord(l)+26)
-            c = chr(ord(l)-(ord(k)-97))
-            plaintext.append(c)
+        code_A = 65
+    else: code_A = 97
+    for ch, k in zip(list(ciphertext), list(keyword)):
+        if (ord(ch) < ord(k)):
+            ch = chr(ord(ch) + 26)
+        plaintext += chr(ord(ch) - (ord(k) - code_A))
     return plaintext
