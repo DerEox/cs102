@@ -1,10 +1,11 @@
 import random
 
+
 def is_prime(n: int) -> bool:     
     if n <= 1:
         return False
     else:
-        for i in range(2,n):
+        for i in range(2, n):
             if n % i == 0:
                 return False
     return True
@@ -16,8 +17,8 @@ def gcd(a: int, b: int) -> int:
         return a
 
 
-def multiplicative_inverse(a, m):
-    def egcd(a, b):
+def multiplicative_inverse(a: int, m: int) -> int:
+    def egcd(a: int, b: int) -> 'Tuple[int, int, int]':
         if a == 0:
             return (b, 0, 1)
         else:
@@ -30,7 +31,7 @@ def multiplicative_inverse(a, m):
         return x % m
 
 
-def generate_keypair(p, q):
+def generate_keypair(p: int, q: int) -> 'Tuple[Tuple[int, int], Tuple[int, int]]':
     if not (is_prime(p) and is_prime(q)):
         raise ValueError('Both numbers must be prime.')
     elif p == q:
@@ -41,7 +42,7 @@ def generate_keypair(p, q):
 
     # Choose an integer e such that e and phi(n) are coprime
     e = random.randrange(1, phi)
-    while not (is_prime(e)==True):
+    while not (is_prime(e) == True):
         e = random.randrange(1, phi)
 
     # Use Euclid's Algorithm to verify that e and phi(n) are comprime
@@ -58,7 +59,7 @@ def generate_keypair(p, q):
     return ((e, n), (d, n))
 
 
-def encrypt(pk, plaintext):
+def encrypt(pk: int, plaintext: str) -> str:
     # Unpack the key into it's components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
@@ -68,7 +69,7 @@ def encrypt(pk, plaintext):
     return cipher
 
 
-def decrypt(pk, ciphertext):
+def decrypt(pk: int, ciphertext: str) -> str:
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
