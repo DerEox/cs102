@@ -187,6 +187,9 @@ def generate_sudoku(N: int) -> List[List[str]]:
         empty_values.append('.')
     empty_grid = group(empty_values, 9)
 
+    if N == 0:
+        return empty_grid
+
     grid = solve(empty_grid)
     values = []
     for i in grid:
