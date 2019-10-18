@@ -188,7 +188,6 @@ def generate_sudoku(N: int) -> List[List[str]]:
     empty_grid = group(empty_values, 9)
 
     grid = solve(empty_grid)
-    display(grid)
     values = []
     for i in grid:
         values += i
@@ -201,3 +200,14 @@ def generate_sudoku(N: int) -> List[List[str]]:
             dots += 1
     grid = group(values, 9)
     return grid
+
+
+if __name__ == '__main__':
+    for fname in ['puzzle1.txt', 'puzzle2.txt', 'puzzle3.txt']:
+        grid = read_sudoku(fname)
+        display(grid)
+        solution = solve(grid)
+        if not solution:
+            print(f"Puzzle {fname} can't be solved")
+        else:
+            display(solution)
